@@ -194,17 +194,69 @@ const AccordionContent = styled.div`
 `;
 
 const Gallery = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 2vw;
   margin-top: 40px;
+  flex-wrap: wrap;
+
+  @media (max-width: 700px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5em;
+  }
+`;
+
+const PolaroidCard = styled.div`
+  box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  padding: 0;
+  border: none;
+  background: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 260px;
+  margin: 0;
+  transition: transform 0.2s;
+
+  &:nth-child(1) {
+    transform: rotate(-7deg);
+  }
+  &:nth-child(2) {
+    transform: rotate(0deg);
+  }
+  &:nth-child(3) {
+    transform: rotate(8deg);
+  }
+  &:nth-child(4) {
+    transform: rotate(-4deg);
+  }
+
+  @media (max-width: 700px) {
+    width: 80vw;
+    max-width: 320px;
+    transform: none !important;
+  }
 `;
 
 const GalleryImage = styled.img`
   width: 100%;
-  height: 200px;
+  height: 220px;
   object-fit: cover;
-  border-radius: 5px;
+  border-radius: 8px;
+  box-shadow: none;
+  border: 3px solid #ecebe4;
+  margin: 0;
+`;
+
+const PolaroidCaption = styled.div`
+  font-family: "Pacific Northwest Letters W01", cursive;
+  font-size: 1.3rem;
+  color: #222;
+  margin-top: 0.5em;
+  text-align: center;
 `;
 
 const ContactForm = styled.form`
@@ -376,11 +428,12 @@ export default function Home() {
           <SectionTitle>Unsere Räumlichkeiten</SectionTitle>
           <Gallery>
             {[1, 2, 3, 4].map((num) => (
-              <GalleryImage
-                key={num}
-                src={`/placeholder-${num}.jpg`}
-                alt={`Räumlichkeit ${num}`}
-              />
+              <PolaroidCard key={num}>
+                <GalleryImage
+                  src={`/placeholder-${num}.png`}
+                  alt={`Räumlichkeit ${num}`}
+                />
+              </PolaroidCard>
             ))}
           </Gallery>
         </Section>
