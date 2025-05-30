@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { useState } from "react";
+import styled, { keyframes } from "styled-components";
+import { useState, useEffect } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import { Montserrat, Nunito } from "next/font/google";
@@ -17,6 +17,36 @@ const nunito = Nunito({
   variable: "--font-nunito",
   display: "swap",
 });
+
+// Animations
+const ascend = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+`;
+
+const burst = keyframes`
+  0% {
+    opacity: 0;
+    transform: scale(0.7) rotate(-8deg);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.1) rotate(2deg);
+  }
+  80% {
+    transform: scale(0.95) rotate(-2deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+`;
 
 // Styled Components
 const Container = styled.div`
@@ -67,6 +97,7 @@ const Hero = styled.section`
   background: #f9f6f1;
   overflow: hidden;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 `;
@@ -86,6 +117,9 @@ const Train = styled.img`
 `;
 
 const HeroContent = styled.div`
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -96,21 +130,30 @@ const HeroContent = styled.div`
 const HeroImage = styled.img`
   width: 400px;
   max-width: 90vw;
-  margin: -3.5em 0 0.2em 0;
+  margin: -5em auto 0.01em auto;
   display: block;
   position: relative;
   z-index: 1;
 `;
 
-const MainTitle = styled.h1`
+const AnimatedAscend = styled.div`
+  animation: ${ascend} 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+  opacity: 0;
+  animation-delay: ${({ delay }) => delay || "0s"};
+`;
+
+const AnimatedBurst = styled.h1`
   font-family: "Pacific Northwest Letters W01", cursive;
   font-size: 3.4rem;
   color: #6b8e6b;
-  margin: -1.1em 0 0 0;
+  margin: -0.4em 0 0 0;
   letter-spacing: 0.04em;
   text-align: center;
   position: relative;
   z-index: 2;
+  opacity: 0;
+  animation: ${burst} 0.7s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+  animation-delay: ${({ delay }) => delay || "0s"};
 `;
 
 const Section = styled.section`
@@ -218,7 +261,7 @@ const CurvedTextSVG = ({ text }) => (
     viewBox="0 0 500 180"
     style={{
       display: "block",
-      margin: "-1.5em auto -2.2em auto",
+      margin: "-2.5em auto -5em auto",
       maxWidth: "90vw",
       position: "relative",
       zIndex: 3,
@@ -242,10 +285,16 @@ const CurvedTextSVG = ({ text }) => (
 
 export default function Home() {
   const [accordionOpen, setAccordionOpen] = useState(null);
+  const [showBurst, setShowBurst] = useState(false);
 
   const toggleAccordion = (index) => {
     setAccordionOpen(accordionOpen === index ? null : index);
   };
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowBurst(true), 800); // delay for burst
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <>
@@ -267,9 +316,13 @@ export default function Home() {
         <Hero>
           <Fairy src="/fairy.svg" alt="Fairy" />
           <HeroContent>
-            <CurvedTextSVG text="Willkommen bei" />
-            <HeroImage src="/castle.svg" alt="Castle, bunny, blocks" />
-            <MainTitle>Allerhand Tageskinder</MainTitle>
+            <AnimatedAscend delay="0s">
+              <CurvedTextSVG text="Willkommen bei" />
+              <HeroImage src="/castle.svg" alt="Castle, bunny, blocks" />
+            </AnimatedAscend>
+            {showBurst && (
+              <AnimatedBurst delay="0.1s">Allerhand Tageskinder</AnimatedBurst>
+            )}
             <Train src="/train.svg" alt="Train" />
           </HeroContent>
         </Hero>
