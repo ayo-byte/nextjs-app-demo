@@ -32,6 +32,11 @@ const Header = styled.header`
   align-items: center;
   padding: 20px 0;
   border-bottom: 1px solid #f0f0f0;
+  height: 80px;
+  box-sizing: border-box;
+  background: transparent;
+  position: relative;
+  z-index: 10;
 `;
 
 const Logo = styled.h1`
@@ -57,13 +62,13 @@ const ContactButton = styled.button`
 
 const Hero = styled.section`
   position: relative;
-  width: 100vw;
-  min-height: 60vh;
+  width: 100%;
+  min-height: calc(100vh - 80px);
+  background: #f9f6f1;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f9f6f1;
-  overflow: hidden;
 `;
 
 const Fairy = styled.img`
@@ -84,22 +89,28 @@ const HeroContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   z-index: 1;
 `;
 
 const HeroImage = styled.img`
-  width: 320px;
-  max-width: 60vw;
-  margin-bottom: 1.5em;
+  width: 400px;
+  max-width: 90vw;
+  margin: -3.5em 0 0.2em 0;
+  display: block;
+  position: relative;
+  z-index: 1;
 `;
 
 const MainTitle = styled.h1`
   font-family: "Pacific Northwest Letters W01", cursive;
-  font-size: 3.2rem;
+  font-size: 3.4rem;
   color: #6b8e6b;
-  margin: 0;
+  margin: -1.1em 0 0 0;
   letter-spacing: 0.04em;
   text-align: center;
+  position: relative;
+  z-index: 2;
 `;
 
 const Section = styled.section`
@@ -202,13 +213,19 @@ const Footer = styled.footer`
 // Add SVG CurvedTextSVG component
 const CurvedTextSVG = ({ text }) => (
   <svg
-    width="500"
-    height="120"
-    viewBox="0 0 500 120"
-    style={{ display: "block", margin: "0 auto" }}
+    width="100%"
+    height="180"
+    viewBox="0 0 500 180"
+    style={{
+      display: "block",
+      margin: "-1.5em auto -2.2em auto",
+      maxWidth: "90vw",
+      position: "relative",
+      zIndex: 3,
+    }}
   >
     <defs>
-      <path id="curve" d="M 50 100 Q 250 0 450 100" fill="transparent" />
+      <path id="curve" d="M 50 160 Q 250 60 450 160" fill="transparent" />
     </defs>
     <text
       width="500"
@@ -248,12 +265,12 @@ export default function Home() {
         </Header>
 
         <Hero>
-          <Fairy src="/fairy.png" alt="Fairy" />
+          <Fairy src="/fairy.svg" alt="Fairy" />
           <HeroContent>
             <CurvedTextSVG text="Willkommen bei" />
-            <HeroImage src="/castle.png" alt="Castle, bunny, blocks" />
+            <HeroImage src="/castle.svg" alt="Castle, bunny, blocks" />
             <MainTitle>Allerhand Tageskinder</MainTitle>
-            <Train src="/train.png" alt="Train" />
+            <Train src="/train.svg" alt="Train" />
           </HeroContent>
         </Hero>
 
