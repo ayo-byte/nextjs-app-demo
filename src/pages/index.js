@@ -374,6 +374,40 @@ const Footer = styled.footer`
   margin-top: 40px;
 `;
 
+const ProfileSection = styled(Section)`
+  display: flex;
+  align-items: flex-start;
+  gap: 2.5rem;
+  @media (max-width: 800px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+`;
+
+const ProfileImageFrame = styled.div`
+  border: solid 2px #41403e;
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  box-shadow: 20px 38px 34px -26px hsla(0, 0%, 0%, 0.2);
+  padding: 1rem;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 1200px;
+  max-height: 460px;
+  transform: rotate(-5deg);
+  margin: 2rem;
+`;
+
+const ProfileImage = styled.img`
+  width: 1500px;
+  height: 400px;
+  object-fit: cover;
+  //border-radius: 50%;
+  display: block;
+`;
+
 // Add SVG CurvedTextSVG component
 const CurvedTextSVG = ({ text }) => (
   <svg
@@ -403,6 +437,54 @@ const CurvedTextSVG = ({ text }) => (
     </text>
   </svg>
 );
+
+const AboutSection = styled.section`
+  padding: 4rem 2rem;
+  background: ${({ theme }) => theme.colors.background};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 4rem;
+  }
+`;
+
+const AboutImage = styled.div`
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  height: 400px; /* Fixed height to match text */
+  margin: 0 auto;
+
+  @media (min-width: 768px) {
+    margin: 0;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Changed from contain to cover */
+    border-radius: 20px;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border: 2px solid ${({ theme }) => theme.colors.primary};
+    border-radius: 25px;
+    z-index: -1;
+  }
+`;
 
 export default function Home() {
   const [accordionOpen, setAccordionOpen] = useState(null);
@@ -516,32 +598,37 @@ export default function Home() {
           </Gallery>
         </Section>
 
-        <Section id="ueber-mich">
-          <SectionTitle>Über mich</SectionTitle>
-          <p>
-            Mein Name ist Martina Pfeifer, Jahrgang 1965. Schon im Alter von 13
-            Jahren habe ich meine erste Erfahrung in der Kinderbetreuung
-            gesammelt – damals habe ich mit großer Freude auf jüngere Kinder in
-            der Nachbarschaft aufgepasst. Diese frühe Begeisterung für die
-            Arbeit mit Kindern hat mich nie losgelassen.
-          </p>
-          <p>
-            Als ich später selbst Mutter wurde, entdeckte ich in der Tätigkeit
-            als Tagesmutter eine wunderbare Möglichkeit, meine Familie und meine
-            Berufung miteinander zu verbinden. Die Kombination aus pädagogischer
-            Verantwortung und einem familiären Umfeld hat mich überzeugt – und
-            erfüllt mich bis heute.
-          </p>
-          <p>
-            Auch wenn meine eigenen Kinder inzwischen längst erwachsen und
-            ausgezogen sind, ist meine Leidenschaft für die liebevolle Betreuung
-            der Kleinsten geblieben. Mit meiner Ausbildung als Erzieherin und
-            vielen Jahren praktischer Erfahrung schaffe ich für die mir
-            anvertrauten Kinder einen geschützten Raum voller Wärme, Sicherheit
-            und Geborgenheit – einen Ort, an dem sie sich frei entfalten und
-            spielerisch die Welt entdecken können.
-          </p>
-        </Section>
+        <ProfileSection id="ueber-mich">
+          <ProfileImageFrame>
+            <ProfileImage src="/profile.png" alt="Martina Pfeifer" />
+          </ProfileImageFrame>
+          <div>
+            <SectionTitle>Über mich</SectionTitle>
+            <p>
+              Mein Name ist Martina Pfeifer, Jahrgang 1965. Schon im Alter von
+              13 Jahren habe ich meine erste Erfahrung in der Kinderbetreuung
+              gesammelt – damals habe ich mit großer Freude auf jüngere Kinder
+              in der Nachbarschaft aufgepasst. Diese frühe Begeisterung für die
+              Arbeit mit Kindern hat mich nie losgelassen.
+            </p>
+            <p>
+              Als ich später selbst Mutter wurde, entdeckte ich in der Tätigkeit
+              als Tagesmutter eine wunderbare Möglichkeit, meine Familie und
+              meine Berufung miteinander zu verbinden. Die Kombination aus
+              pädagogischer Verantwortung und einem familiären Umfeld hat mich
+              überzeugt – und erfüllt mich bis heute.
+            </p>
+            <p>
+              Auch wenn meine eigenen Kinder inzwischen längst erwachsen und
+              ausgezogen sind, ist meine Leidenschaft für die liebevolle
+              Betreuung der Kleinsten geblieben. Mit meiner Ausbildung als
+              Erzieherin und vielen Jahren praktischer Erfahrung schaffe ich für
+              die mir anvertrauten Kinder einen geschützten Raum voller Wärme,
+              Sicherheit und Geborgenheit – einen Ort, an dem sie sich frei
+              entfalten und spielerisch die Welt entdecken können.
+            </p>
+          </div>
+        </ProfileSection>
 
         <Section id="kontakt">
           <SectionTitle>Nimm Kontakt auf</SectionTitle>
