@@ -92,6 +92,8 @@ const HandDrawnButton = styled.button`
   cursor: pointer;
   &:hover {
     box-shadow: 2px 8px 4px -6px hsla(0, 0%, 0%, 0.3);
+    background: #ecebe4;
+
   }
 `;
 
@@ -168,20 +170,21 @@ const Section = styled.section`
 const SectionTitle = styled.h2`
   text-align: left;
   color: #2c3e50;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   font-family: "Pacific Northwest Letters W01", sans-serif;
   font-size: 2.5rem;
 `;
 
 const Accordion = styled.div`
   margin: 20px 0;
+  background: transparent;
 `;
 
 const AccordionItem = styled.div`
   border: solid 2px #41403e;
   border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
   margin-bottom: 18px;
-  background: #f0f6fa;
+  background: transparent;
   box-shadow: 20px 38px 34px -26px hsla(0, 0%, 0%, 0.2);
   overflow: hidden;
   transition: box-shadow 0.2s;
@@ -189,19 +192,19 @@ const AccordionItem = styled.div`
 
 const AccordionHeader = styled.div`
   padding: 18px 24px;
-  background: #f0f6fa;
+  background: transparent;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-family: "Pacific Northwest Letters W01", cursive;
   font-size: 1.35rem;
-  color: #3a5a6b;
+  //color: #3a5a6b;
   transition: background 0.2s;
-  border-bottom: 1px solid #b7d6e8;
+  //border-bottom: 1px solid ;
 
   &:hover {
-    background: #e3f0fa;
+    background: #ecebe4;
   }
 
   h3 {
@@ -239,7 +242,7 @@ const AccordionContent = styled.div`
   padding: ${({ $isOpen }) => ($isOpen ? "18px 24px" : "0 24px")};
   max-height: ${({ $isOpen }) => ($isOpen ? "500px" : "0")};
   overflow: hidden;
-  background: #f0f6fa;
+  background: transparent;
   color: #3a5a6b;
   font-size: 1.08rem;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -262,7 +265,7 @@ const Gallery = styled.div`
 
 const PolaroidFrame = styled.div`
   width: 280px;
-  background: #fff;
+  background: #f9f6f1;
   border: solid 2px #41403e;
   border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
   box-shadow: 20px 38px 34px -26px hsla(0, 0%, 0%, 0.2);
@@ -297,9 +300,29 @@ const PolaroidCaption = styled.p`
   font-family: "Nunito", sans-serif;
 `;
 
+const ContactSection = styled(Section)`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 4rem;
+  }
+`;
+
+const ContactText = styled.div`
+  flex: 1;
+  max-width: 420px;
+`;
+
 const ContactForm = styled.form`
   max-width: 600px;
   margin: 0 auto;
+  flex: 1;
+  background: transparent;
 `;
 
 const FormGroup = styled.div`
@@ -311,7 +334,7 @@ const Input = styled.input`
   padding: 10px;
   border: solid 2px #41403e;
   border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
-  background: #fff;
+  background: transparent;
   font-size: 1rem;
   margin-bottom: 0.5em;
   box-shadow: 2px 8px 4px -6px hsla(0, 0%, 0%, 0.08);
@@ -327,7 +350,7 @@ const TextArea = styled.textarea`
   padding: 10px;
   border: solid 2px #41403e;
   border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
-  background: #fff;
+  background: transparent;
   font-size: 1rem;
   min-height: 150px;
   margin-bottom: 0.5em;
@@ -345,6 +368,7 @@ const SubmitButton = styled.button`
   color: #41403e;
   font-family: "Pacific Northwest Letters W01", cursive;
   font-size: 1.5rem;
+  font-weight: bold;
   padding: 0.7rem 2rem;
   margin: 1.2em auto 0 auto;
   display: block;
@@ -525,23 +549,15 @@ export default function Home() {
         </Hero>
 
         <Section id="konzept">
-          <img
-            src="/Konzept.svg"
-            alt="Das Konzept"
-            style={{
-              display: "block",
-              margin: "0 0 16px 0",
-              maxWidth: "180px",
-              width: "100%",
-            }}
-          />
-          <p>
-            Erleben Sie unser pädagogisches Konzept, das auf familiärer
-            Atmosphäre und individueller Förderung basiert. Unsere kleine Gruppe
-            bietet den Kindern einen sicheren und liebevollen Start in die
-            Zukunft – ganz wie in der eigenen Familie.
-          </p>
-
+          <SectionTitle>Das Konzept</SectionTitle>
+          <ContactText>
+            <p>
+              Erleben Sie unser pädagogisches Konzept, das auf familiärer
+              Atmosphäre und individueller Förderung basiert. Unsere kleine
+              Gruppe bietet den Kindern einen sicheren und liebevollen Start in
+              die Zukunft – ganz wie in der eigenen Familie.
+            </p>
+          </ContactText>
           <Accordion>
             {[
               {
@@ -629,14 +645,37 @@ export default function Home() {
           </div>
         </ProfileSection>
 
-        <Section id="kontakt">
-          <SectionTitle>Nimm Kontakt auf</SectionTitle>
-          <p>
-            Hast du Interesse an einem Betreuungsplatz oder hast du einfach nur
-            Fragen? Fülle gerne das Formular aus oder melde dich direkt – ich
-            werde mich in Kürze bei dir melden. Ich freue mich schon darauf, von
-            euch zu hören.
-          </p>
+        <ContactSection id="kontakt">
+          <ContactText>
+            <SectionTitle>Nimm Kontakt auf</SectionTitle>
+            <p>
+              Hast du Interesse an einem Betreuungsplatz oder hast du einfach
+              nur Fragen? Fülle gerne das Formular aus oder melde dich direkt –
+              ich werde mich in Kürze bei dir melden. Ich freue mich schon
+              darauf, von euch zu hören.
+            </p>
+            <div
+              style={{
+                marginTop: "1.5em",
+                fontSize: "1.08rem",
+                color: "#41403e",
+                lineHeight: "1.6",
+              }}
+            >
+              <strong>Allerhand Tageskinder</strong>
+              <br />
+              Semperstraße 18, 22303 Hamburg
+              <br />
+              <br />
+              E-Mail:{" "}
+              <a
+                href="mailto:kontakt@allerhandtageskinder.de"
+                style={{ color: "#41403e", textDecoration: "underline" }}
+              >
+                kontakt@allerhandtageskinder.de
+              </a>
+            </div>
+          </ContactText>
           <ContactForm>
             <FormGroup>
               <Input type="text" placeholder="Name" />
@@ -649,13 +688,13 @@ export default function Home() {
             </FormGroup>
             <SubmitButton type="submit">Nachricht senden</SubmitButton>
           </ContactForm>
-        </Section>
+        </ContactSection>
 
-        <Footer>
+        {/* <Footer>
           <h3>Allerhand Tageskinder</h3>
           <p>Semperstraße 18, 22303 Hamburg</p>
           <p>E-Mail: kontakt@allerhandtageskinder.de</p>
-        </Footer>
+        </Footer> */}
       </Container>
     </>
   );
