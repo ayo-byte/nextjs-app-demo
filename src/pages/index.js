@@ -166,10 +166,11 @@ const Section = styled.section`
 `;
 
 const SectionTitle = styled.h2`
-  text-align: center;
+  text-align: left;
   color: #2c3e50;
   margin-bottom: 40px;
   font-family: "Pacific Northwest Letters W01", sans-serif;
+  font-size: 2.5rem;
 `;
 
 const Accordion = styled.div`
@@ -259,48 +260,41 @@ const Gallery = styled.div`
   }
 `;
 
-const GalleryImage = styled.img`
-  width: 340px;
-  height: 280px;
-  object-fit: cover;
-  // border-radius: 8px;
-  margin: 0 -40px;
-  background: none;
-  // box-shadow: 0 4px 24px 0 rgba(0,0,0,0.08);
-  display: block;
+const PolaroidFrame = styled.div`
+  width: 280px;
+  background: #fff;
+  border: solid 2px #41403e;
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  box-shadow: 20px 38px 34px -26px hsla(0, 0%, 0%, 0.2);
+  margin: 0 -10px;
+  padding: 1rem 1rem 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
   transition: transform 0.2s;
-
-  &:nth-child(1) {
-    transform: rotate(-7deg);
-  }
-  &:nth-child(2) {
-    transform: rotate(0deg);
-  }
-  &:nth-child(3) {
-    transform: rotate(8deg);
-  }
-  &:nth-child(4) {
-    transform: rotate(-4deg);
-  }
 
   @media (max-width: 700px) {
     width: 90vw;
     max-width: 400px;
-    height: auto;
     margin: 0 0 1.5em 0;
-    &:nth-child(1) {
-      transform: rotate(-4deg);
-    }
-    &:nth-child(2) {
-      transform: rotate(2deg);
-    }
-    &:nth-child(3) {
-      transform: rotate(-3deg);
-    }
-    &:nth-child(4) {
-      transform: rotate(3deg);
-    }
   }
+`;
+
+const PolaroidImage = styled.img`
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 12px 12px 8px 8px/12px 12px 8px 8px;
+  margin-bottom: 0.5rem;
+`;
+
+const PolaroidCaption = styled.p`
+  text-align: center;
+  font-size: 1.1rem;
+  color: #41403e;
+  margin: 0;
+  font-family: "Nunito", sans-serif;
 `;
 
 const ContactForm = styled.form`
@@ -588,12 +582,17 @@ export default function Home() {
         <Section id="raeumlichkeiten">
           <SectionTitle>Unsere Räumlichkeiten</SectionTitle>
           <Gallery>
-            {[1, 2, 3, 4].map((num) => (
-              <GalleryImage
+            {[1, 2, 3, 4].map((num, idx) => (
+              <PolaroidFrame
                 key={num}
-                src={`/placeholder-${num}.png`}
-                alt={`Räumlichkeit ${num}`}
-              />
+                style={{ transform: `rotate(${[-7, 0, 8, -4][idx]}deg)` }}
+              >
+                <PolaroidImage
+                  src={`/placeholder-${num}.png`}
+                  alt={`Räumlichkeit ${num}`}
+                />
+                <PolaroidCaption>Räumlichkeit {num}</PolaroidCaption>
+              </PolaroidFrame>
             ))}
           </Gallery>
         </Section>
