@@ -315,30 +315,55 @@ const FormGroup = styled.div`
 const Input = styled.input`
   width: 100%;
   padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  border: solid 2px #41403e;
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  background: #fff;
+  font-size: 1rem;
+  margin-bottom: 0.5em;
+  box-shadow: 2px 8px 4px -6px hsla(0, 0%, 0%, 0.08);
+  outline: none;
+  transition: border-color 0.2s;
+  &:focus {
+    border-color: #7b4ca0;
+  }
 `;
 
 const TextArea = styled.textarea`
   width: 100%;
   padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  border: solid 2px #41403e;
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  background: #fff;
+  font-size: 1rem;
   min-height: 150px;
+  margin-bottom: 0.5em;
+  box-shadow: 2px 8px 4px -6px hsla(0, 0%, 0%, 0.08);
+  outline: none;
+  transition: border-color 0.2s;
+  resize: vertical;
+  &:focus {
+    border-color: #7b4ca0;
+  }
 `;
 
 const SubmitButton = styled.button`
-  background-color: #e67e22;
-  color: white;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 5px;
+  background: transparent;
+  color: #41403e;
+  font-family: "Pacific Northwest Letters W01", cursive;
+  font-size: 1.5rem;
+  padding: 0.7rem 2rem;
+  margin: 1.2em auto 0 auto;
+  display: block;
+  letter-spacing: 1px;
+  outline: none;
+  box-shadow: 20px 38px 34px -26px hsla(0, 0%, 0%, 0.2);
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  border: solid 2px #41403e;
   cursor: pointer;
-  width: 100%;
-  transition: background-color 0.3s;
-
+  transition: box-shadow 0.2s, background 0.2s;
   &:hover {
-    background-color: #d35400;
+    box-shadow: 2px 8px 4px -6px hsla(0, 0%, 0%, 0.3);
+    background: #ecebe4;
   }
 `;
 
