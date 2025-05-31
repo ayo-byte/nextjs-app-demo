@@ -39,6 +39,10 @@ export default function App({ Component, pageProps }) {
           href="https://db.onlinewebfonts.com/c/e0870aa7286662dd08f498a39e6737de?family=Pacific+Northwest+Letters+W01"
           rel="stylesheet"
         />
+        <link
+          href="https://fonts.googleapis.com/css?family=Patrick+Hand+SC"
+          rel="stylesheet"
+        />
       </Head>
       <GlobalStyle />
       <Component {...pageProps} />

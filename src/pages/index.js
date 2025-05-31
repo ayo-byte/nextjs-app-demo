@@ -76,17 +76,22 @@ const Logo = styled.h1`
   font-family: "Pacific Northwest Letters W01", sans-serif;
 `;
 
-const ContactButton = styled.button`
-  background-color: #e67e22;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
+const HandDrawnButton = styled.button`
+  background: transparent;
+  padding: 0rem 1rem;
+  margin: 0 1rem;
+  transition: all 0.5s ease;
+  color: #41403e;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+  outline: none;
+  font-family: "Pacific Northwest Letters W01", cursive;
+  box-shadow: 20px 38px 34px -26px hsla(0, 0%, 0%, 0.2);
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  border: solid 2px #41403e;
   cursor: pointer;
-  transition: background-color 0.3s;
-
   &:hover {
-    background-color: #d35400;
+    box-shadow: 2px 8px 4px -6px hsla(0, 0%, 0%, 0.3);
   }
 `;
 
@@ -172,25 +177,71 @@ const Accordion = styled.div`
 `;
 
 const AccordionItem = styled.div`
-  border: 1px solid #f0f0f0;
-  border-radius: 5px;
-  margin-bottom: 10px;
+  border: solid 2px #41403e;
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  margin-bottom: 18px;
+  background: #f0f6fa;
+  box-shadow: 20px 38px 34px -26px hsla(0, 0%, 0%, 0.2);
+  overflow: hidden;
+  transition: box-shadow 0.2s;
 `;
 
 const AccordionHeader = styled.div`
-  padding: 15px;
-  background-color: #f8f9fa;
+  padding: 18px 24px;
+  background: #f0f6fa;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-family: "Pacific Northwest Letters W01", cursive;
+  font-size: 1.35rem;
+  color: #3a5a6b;
+  transition: background 0.2s;
+  border-bottom: 1px solid #b7d6e8;
+
+  &:hover {
+    background: #e3f0fa;
+  }
+
+  h3 {
+    font-family: "Pacific Northwest Letters W01", cursive;
+    font-size: 1.35rem;
+    margin: 0;
+    color: #3a5a6b;
+    letter-spacing: 0.01em;
+  }
+
+  span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #b7d6e8;
+    color: #fff;
+    font-size: 1.5em;
+    font-weight: bold;
+    box-shadow: 0 1px 4px 0 rgba(120, 160, 200, 0.12);
+    margin-left: 12px;
+    transition: background 0.2s;
+  }
+`;
+
+const AccordionDivider = styled.div`
+  border-top: solid 2px #41403e;
+  width: 100%;
+  margin: 0;
 `;
 
 const AccordionContent = styled.div`
-  padding: ${(props) => (props.$isOpen ? "15px" : "0 15px")};
-  max-height: ${(props) => (props.$isOpen ? "500px" : "0")};
+  padding: ${({ $isOpen }) => ($isOpen ? "18px 24px" : "0 24px")};
+  max-height: ${({ $isOpen }) => ($isOpen ? "500px" : "0")};
   overflow: hidden;
-  transition: all 0.3s ease-in-out;
+  background: #f0f6fa;
+  color: #3a5a6b;
+  font-size: 1.08rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 `;
 
 const Gallery = styled.div`
@@ -355,7 +406,7 @@ export default function Home() {
       <Container className={`${montserrat.variable} ${nunito.variable}`}>
         <Header>
           <Logo>Allerhand Tageskinder</Logo>
-          <ContactButton>Kontakt</ContactButton>
+          <HandDrawnButton>Kontakt</HandDrawnButton>
         </Header>
 
         <Hero>
@@ -373,7 +424,16 @@ export default function Home() {
         </Hero>
 
         <Section id="konzept">
-          <SectionTitle>Das Konzept</SectionTitle>
+          <img
+            src="/Konzept.svg"
+            alt="Das Konzept"
+            style={{
+              display: "block",
+              margin: "0 0 16px 0",
+              maxWidth: "180px",
+              width: "100%",
+            }}
+          />
           <p>
             Erleben Sie unser pädagogisches Konzept, das auf familiärer
             Atmosphäre und individueller Förderung basiert. Unsere kleine Gruppe
@@ -409,6 +469,7 @@ export default function Home() {
                   <h3>{item.title}</h3>
                   <span>{accordionOpen === index ? "−" : "+"}</span>
                 </AccordionHeader>
+                <AccordionDivider />
                 <AccordionContent $isOpen={accordionOpen === index}>
                   <p>{item.content}</p>
                 </AccordionContent>
