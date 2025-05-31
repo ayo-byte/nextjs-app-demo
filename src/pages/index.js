@@ -208,17 +208,15 @@ const Gallery = styled.div`
   }
 `;
 
-const PolaroidCard = styled.div`
-  box-shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.08);
-  border-radius: 8px;
-  padding: 0;
-  border: none;
+const GalleryImage = styled.img`
+  width: 340px;
+  height: 280px;
+  object-fit: cover;
+  // border-radius: 8px;
+  margin: 0 -40px;
   background: none;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 260px;
-  margin: 0;
+  // box-shadow: 0 4px 24px 0 rgba(0,0,0,0.08);
+  display: block;
   transition: transform 0.2s;
 
   &:nth-child(1) {
@@ -235,28 +233,23 @@ const PolaroidCard = styled.div`
   }
 
   @media (max-width: 700px) {
-    width: 80vw;
-    max-width: 320px;
-    transform: none !important;
+    width: 90vw;
+    max-width: 400px;
+    height: auto;
+    margin: 0 0 1.5em 0;
+    &:nth-child(1) {
+      transform: rotate(-4deg);
+    }
+    &:nth-child(2) {
+      transform: rotate(2deg);
+    }
+    &:nth-child(3) {
+      transform: rotate(-3deg);
+    }
+    &:nth-child(4) {
+      transform: rotate(3deg);
+    }
   }
-`;
-
-const GalleryImage = styled.img`
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-  border-radius: 8px;
-  box-shadow: none;
-  border: 3px solid #ecebe4;
-  margin: 0;
-`;
-
-const PolaroidCaption = styled.div`
-  font-family: "Pacific Northwest Letters W01", cursive;
-  font-size: 1.3rem;
-  color: #222;
-  margin-top: 0.5em;
-  text-align: center;
 `;
 
 const ContactForm = styled.form`
@@ -428,12 +421,11 @@ export default function Home() {
           <SectionTitle>Unsere Räumlichkeiten</SectionTitle>
           <Gallery>
             {[1, 2, 3, 4].map((num) => (
-              <PolaroidCard key={num}>
-                <GalleryImage
-                  src={`/placeholder-${num}.png`}
-                  alt={`Räumlichkeit ${num}`}
-                />
-              </PolaroidCard>
+              <GalleryImage
+                key={num}
+                src={`/placeholder-${num}.png`}
+                alt={`Räumlichkeit ${num}`}
+              />
             ))}
           </Gallery>
         </Section>
